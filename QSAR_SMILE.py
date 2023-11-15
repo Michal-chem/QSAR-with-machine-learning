@@ -38,7 +38,7 @@ for index, row in df_init.iterrows():
 Data preparation
 '''     
   
-X = df_init['Encoded_SMILES'].apply(lambda x: list(map(int, list(x))))
+X = df_init['Morgan_fingerprints'].apply(lambda x: list(map(int, list(x))))
 X = pd.DataFrame(X.tolist())
 y=pd.DataFrame(df_init['target variables'])
 
