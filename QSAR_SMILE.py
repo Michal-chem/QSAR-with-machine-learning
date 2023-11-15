@@ -65,7 +65,7 @@ grid_param = {
 cv = KFold(n_splits=5, shuffle=True, random_state=42)
 mlp_grid_search = GridSearchCV(mlp, grid_param, cv=cv, scoring='r2')
 mlp_grid_search.fit(X_train, np.ravel(y_train))
-best_model = mlp.grid_search.best_estimator_  
+best_model = mlp_grid_search.best_estimator_  
 
 print("Grid search results:")
 print(f"Best parameters: {mlp_grid_search.best_params_}")
