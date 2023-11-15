@@ -24,7 +24,7 @@ Loading data and conversion from SMILES to Morgan Fingerprints
 
 df_init = pd.read_csv('init_data.csv', delimiter = ';',decimal=',', on_bad_lines='skip')
 
-#sdf_init = df_init.iloc[:,:6]
+#df_init = df_init.iloc[:,:6]
 
 for index, row in df_init.iterrows():
     smiles = row['mol']
@@ -100,6 +100,5 @@ Save the model for future use
 '''
 
 joblib.dump(best_model, 'Best regression model.pkl') 
-a=joblib.load('Best regression model.pkl') 
-b = a.predict(X_test)
+
 
