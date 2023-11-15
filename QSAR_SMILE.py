@@ -3,7 +3,7 @@
 """
 Created on Wed Nov 15 13:18:19 2023
 
-@author: miko69
+@author: miko
 """
 
 import pandas as pd
@@ -27,20 +27,20 @@ df_init = pd.read_csv('init_data.csv', delimiter = ';',decimal=',', on_bad_lines
 #df_init = df_init.iloc[:,:6]
 
 for index, row in df_init.iterrows():
-    smiles = row['mol']
+    smiles = row['SMILES']
     molecule = Chem.MolFromSmiles(smiles)
     if molecule is not None:
         fp = AllChem.GetMorganFingerprintAsBitVect(molecule, 2)
         bit_string = fp.ToBitString()
-        df_init.loc[index, 'Encoded_SMILES'] = bit_string
+        df_init.loc[index, 'Morgan_fingerprints'] = bit_string
         
 '''
 Data preparation
 '''     
   
-X = df_init['Encoded_SMILES'].apply(lambda x: list(map(int, list(x))))  # Konwertuj ciągi bitów na listy liczb
+X = df_init['Encoded_SMILES'].apply(lambda x: list(map(int, list(x))))
 X = pd.DataFrame(X.tolist())
-y=pd.DataFrame(df_init['hCA12'])
+y=pd.DataFrame(df_init['target variables'])
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
